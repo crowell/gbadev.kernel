@@ -182,7 +182,7 @@ static void wii_restart(char *cmd)
 
 	local_irq_disable();
 
-	hw_resets = ioremap(0x0d800194, 4);
+	hw_resets = ioremap(0x0d8005e0, 4);
 	if (hw_resets) {
 		/* clear the system reset pin to cause a reset */
 		clear_bit(0, hw_resets);
