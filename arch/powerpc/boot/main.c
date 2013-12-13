@@ -205,6 +205,14 @@ void start(void)
 	if (console_ops.close)
 		console_ops.close();
 
+	//this will kick start the other two cores
+	//now that the main core is about to start into vmlinux
+	asm(
+	 "mfspr %r3,$947;"
+	 "oris %r3,%r3,$0x0060;"
+	 "mtspr $947,%r3;"
+	);
+
 	kentry = (kernel_entry_t) vmlinux.addr;
 	if (ft_addr)
 		kentry(ft_addr, 0, NULL);
