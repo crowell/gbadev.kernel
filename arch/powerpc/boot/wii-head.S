@@ -131,6 +131,28 @@ _mmu_off:
 	sync
 	rfi
 _mmu_on:
+
+	lis	8,0x0d80
+	ori	8,8,0x05a0
+	lwz	9,0(8)
+	li	8,16
+	srw 9,9,8
+	cmpwi 9,0xCAFE
+	bne _end_wii_u_prep
+	
+	mfspr 8,944
+	oris 8,8,0xc000
+	mtspr 944,8
+	/* hid5(944) |= 0xc0000000; (enable HID5 and PIR) */
+	
+	mfspr 3,1007	/* core number (PIR) to r3 */
+	cmpwi 3,0
+	beq _end_wii_u_prep
+	
+	b __secondary_hold
+	
+_end_wii_u_prep:
+	
 	/* turn on the front blue led (aka: yay! we got here!) */
 	lis	8, 0x0d00
 	ori	8, 8, 0x00c0
