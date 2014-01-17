@@ -135,11 +135,10 @@ _mmu_on:
 	lis	8,0x0d80
 	ori	8,8,0x05a0
 	lwz	9,0(8)
-	li	8,16
+	li	8,17
 	srw 9,9,8
-	li 8,0x657F
-	li 3,1
-	slw 8,8,3	/* r8 = 0xCAFE */
+	li 8,0x657F	/* 0xCAFE >> 1 */
+	slw 8,8,3
 	cmpw 9,8
 	bne _end_wii_u_prep
 	
@@ -152,7 +151,14 @@ _mmu_on:
 	cmpwi 3,0
 	beq _end_wii_u_prep
 	
-	b __secondary_hold
+	li 8,0xc4
+	oris 8,8,0xc000
+	mfmsr 9
+	mtsrr0 8
+	mtsrr1 9
+	sync
+	rfi
+	/* b __secondary_hold */
 	
 _end_wii_u_prep:
 	
