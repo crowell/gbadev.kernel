@@ -209,9 +209,9 @@ void start(void)
 	{	//this will kick start the other two cores
 		//now that the main core is about to start into vmlinux
 		asm(
-		 "mfspr %r3,$947;"
-		 "oris %r3,%r3,$0x0060;"
-		 "mtspr $947,%r3;"
+		 "mfspr %r3,947;"
+		 "oris %r3,%r3,0x0060;"
+		 "mtspr 947,%r3;"
 		);
 	}
 
