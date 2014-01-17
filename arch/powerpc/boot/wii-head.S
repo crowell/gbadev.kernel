@@ -137,7 +137,9 @@ _mmu_on:
 	lwz	9,0(8)
 	li	8,16
 	srw 9,9,8
-	li 8,0xCAFE
+	li 8,0x657F
+	li 3,1
+	slw 8,8,3	/* r8 = 0xCAFE */
 	cmpw 9,8
 	bne _end_wii_u_prep
 	
