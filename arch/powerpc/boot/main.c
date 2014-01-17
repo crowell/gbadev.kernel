@@ -212,6 +212,7 @@ void start(void)
 		 "mfspr %r3,947;"
 		 "oris %r3,%r3,0x0060;"
 		 "mtspr 947,%r3;"
+		 :::"%r3"
 		);
 	}
 
