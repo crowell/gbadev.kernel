@@ -205,7 +205,7 @@ void start(void)
 	if (console_ops.close)
 		console_ops.close();
 
-	if((*(u32*)0x0d8005A0) & 0xFFFF0000) == 0xCAFE0000) // if it's a Wii U
+	if(((*(u32*)0x0d8005A0) & 0xFFFF0000) == 0xCAFE0000) // if it's a Wii U
 	{	//this will kick start the other two cores
 		//now that the main core is about to start into vmlinux
 		asm(
