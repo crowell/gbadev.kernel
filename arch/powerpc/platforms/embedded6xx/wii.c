@@ -38,6 +38,7 @@
 #include "hlwd-pic.h"
 #include "gcnvi_udbg.h"
 #include "usbgecko_udbg.h"
+#include "minilog_udbg.h"
 
 /* control block */
 #define HW_CTRL_COMPATIBLE	"nintendo,hollywood-control"
@@ -297,7 +298,7 @@ static void __init wii_setup_arch(void)
 		clrbits32(hw_gpio + HW_GPIO_OUT(0),
 			  HW_GPIO_SLOT_LED | HW_GPIO_SENSOR_BAR);
 	}
-
+	minilog_udbg_init();
 	ug_udbg_init();
 	gcnvi_udbg_init();
 	starlet_discover_ipc_flavour();
@@ -311,7 +312,7 @@ static void wii_halt(void)
 }
 
 static void __init wii_init_early(void)
-{
+{	minilog_udbg_init();
 	ug_udbg_init();
 }
 
