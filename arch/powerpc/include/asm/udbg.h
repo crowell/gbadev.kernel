@@ -53,6 +53,6 @@ extern void __init udbg_init_40x_realmode(void);
 extern void __init udbg_init_cpm(void);
 extern void __init udbg_init_usbgecko(void);
 extern void __init udbg_init_wsp(void);
-
+extern void __init udbg_init_early_minilog(void);
 #endif /* __KERNEL__ */
 #endif /* _ASM_POWERPC_UDBG_H */

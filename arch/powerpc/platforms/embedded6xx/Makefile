@@ -10,6 +10,7 @@ obj-$(CONFIG_PPC_C2K)		+= c2k.o
 obj-$(CONFIG_GAMECUBE_VIDEO_UDBG)	+= gcnvi_udbg.o
 obj-$(CONFIG_GAMECUBE_RSW)	+= gcn-rsw.o
 obj-$(CONFIG_USBGECKO_UDBG)	+= usbgecko_udbg.o
+obj-$(CONFIG_MINILOG_UDBG)	+= minilog_udbg.o
 obj-$(CONFIG_GAMECUBE_COMMON)	+= flipper-pic.o
 obj-$(CONFIG_GAMECUBE)		+= gamecube.o
 obj-$(CONFIG_WII)		+= wii.o
