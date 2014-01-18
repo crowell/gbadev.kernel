@@ -13,15 +13,6 @@ void minilog_udbg_putc(char ch)
 }
 
 void __init minilog_udbg_init(void)
-{	udbg_init_early_minilog();
-}
-
-#ifdef CONFIG_PPC_EARLY_DEBUG_MINILOG
-
-/*
- * USB Gecko early debug support initialization for udbg.
- */
-void __init udbg_init_early_minilog(void)
 {
 	udbg_putc = minilog_udbg_putc;
 	/*
@@ -52,6 +43,15 @@ void __init udbg_init_early_minilog(void)
 	setbat(1, (unsigned long)early_debug_area,
 	       MINILOG_COMMINICATION_AREA, 128*1024, PAGE_KERNEL_NCG);
 */
+}
+
+#ifdef CONFIG_PPC_EARLY_DEBUG_MINILOG
+
+/*
+ * USB Gecko early debug support initialization for udbg.
+ */
+void __init udbg_init_early_minilog(void)
+{	minilog_udbg_init();
 }
 
 #endif /* CONFIG_PPC_EARLY_DEBUG_MINILOG */
