@@ -132,15 +132,27 @@ _mmu_off:
 	rfi
 _mmu_on:
 
-	lis	8,0x0d80
-	ori	8,8,0x05a0
-	lwz	9,0(8)
-	li	8,17
-	srw 9,9,8
-	li 8,0x657F	/* 0xCAFE >> 1 */
-	slw 8,8,3
-	cmpw 9,8
+	/* sets output bits for both sensor bar and drive light */
+	lis	8, 0x0d00
+	ori	8, 8, 0x00c4
+	lwz	9, 0(8)
+	ori	9, 9, 0x120
+	stw	9, 0(8)
+
+	/* checks if this is a Wii U or not */
+	lis	7,0x0d80
+	ori	7,7,0x05a0
+	lwz	9,0(7)
+	li	7,16
+	srw 9,9,7
+	cmpwi 9,0xCAFE
 	bne _end_wii_u_prep
+	
+	/* turn on the sensor bar (aka: yay! we got here!) */
+	subi 8,8, 0x4
+	lwz	9, 0(8)
+	ori	9, 9, 0x100
+	stw	9, 0(8)
 	
 	mfspr 8,944
 	oris 8,8,0xc000

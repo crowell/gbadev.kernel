@@ -17,6 +17,7 @@
 #include "ops.h"
 #include "gunzip_util.h"
 #include "reg.h"
+#include "io.h"
 
 static struct gunzip_state gzstate;
 
@@ -208,11 +209,14 @@ void start(void)
 	if(((*(u32*)0x0d8005A0) & 0xFFFF0000) == 0xCAFE0000) // if it's a Wii U
 	{	//this will kick start the other two cores
 		//now that the main core is about to start into vmlinux
+		out_be32(EXI_CTRL, in_be32(EXI_CTRL) & ~EXI_CTRL_ENABLE);
 		asm(
 		 "mfspr %r3,947;"
 		 "oris %r3,%r3,0x0060;"
 		 "mtspr 947,%r3;"
 		);
+		eieio();
+		out_be32(EXI_CTRL, in_be32(EXI_CTRL) | EXI_CTRL_ENABLE);
 	}
 
 	kentry = (kernel_entry_t) vmlinux.addr;
