@@ -26,6 +26,11 @@ struct addr_range {
 	unsigned long size;
 };
 
+#define HW_REG(x)		((void *)(x))
+
+#define EXI_CTRL		HW_REG(0x0d800070)
+#define EXI_CTRL_ENABLE		(1<<0)
+
 #undef DEBUG
 
 static struct addr_range prep_kernel(void)
