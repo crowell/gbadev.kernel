@@ -143,9 +143,9 @@ _mmu_on:
 	lis	7,0x0d80
 	ori	7,7,0x05a0
 	lwz	9,0(7)
-	li	7,16
+	li	7,17
 	srw 9,9,7
-	cmpwi 9,0xCAFE
+	cmpwi 9,0x657F	/* 0xCAFE >> 1 */
 	bne _end_wii_u_prep
 	
 	/* turn on the sensor bar (aka: yay! we got here!) */
