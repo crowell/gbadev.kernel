@@ -130,7 +130,7 @@ if [ ${MACHINE_TYPE} = 'x86_32' ]; then
   fi
 
   make menuconfig ARCH=powerpc CROSS_COMPILE=H-i686-pc-linux-gnu/cross-powerpc-linux-uclibc/usr/bin/powerpc-linux-
-  make clean ARCH=powerpc CROSS_COMPILE=H-i686-pc-linux-gnu/cross-powerpc-linux-uclibc/usr/bin/powerpc-linux-
+#  make clean ARCH=powerpc CROSS_COMPILE=H-i686-pc-linux-gnu/cross-powerpc-linux-uclibc/usr/bin/powerpc-linux-
   make -j${numProcessors} ARCH=powerpc CROSS_COMPILE=H-i686-pc-linux-gnu/cross-powerpc-linux-uclibc/usr/bin/powerpc-linux-
 
 
@@ -144,7 +144,7 @@ elif [ ${MACHINE_TYPE} = 'x86_64' ]; then
   fi
 
   make menuconfig ARCH=powerpc CROSS_COMPILE=H-i686-pc-linux-gnu/cross-powerpc-linux-uclibc/usr/bin/powerpc-linux-
-  make clean ARCH=powerpc CROSS_COMPILE=H-x86_64-pc-linux-gnu/cross-powerpc-linux-uclibc/usr/bin/powerpc-linux-
+#  make clean ARCH=powerpc CROSS_COMPILE=H-x86_64-pc-linux-gnu/cross-powerpc-linux-uclibc/usr/bin/powerpc-linux-
   make -j${numProcessors} ARCH=powerpc CROSS_COMPILE=H-x86_64-pc-linux-gnu/cross-powerpc-linux-uclibc/usr/bin/powerpc-linux-
 
 
@@ -156,7 +156,7 @@ else # Arch must be 32 bit powerpc as it's the only choice left
     make ${useConfig}
   fi
 
-  make clean
+#  make clean
   make menuconfig
   make -j${numProcessors}
 fi
