@@ -148,12 +148,6 @@ _mmu_on:
 	cmpwi 9,0x657F	/* 0xCAFE >> 1 */
 	bne _end_wii_u_prep
 	
-	/* turn on the sensor bar (aka: yay! we got here!) */
-	subi 8,8, 0x4
-	lwz	9, 0(8)
-	ori	9, 9, 0x100
-	stw	9, 0(8)
-	
 	mfspr 8,944
 	oris 8,8,0xc000
 	mtspr 944,8
@@ -162,6 +156,12 @@ _mmu_on:
 	mfspr 3,1007	/* core number (PIR) to r3 */
 	cmpwi 3,0
 	beq _end_wii_u_prep
+	
+	/* turn on the sensor bar (aka: yay! other cores got here!) */
+	subi 8,8, 0x4
+	lwz	9, 0(8)
+	ori	9, 9, 0x100
+	stw	9, 0(8)
 	
 	li 8,0xc4
 	oris 8,8,0xc000
