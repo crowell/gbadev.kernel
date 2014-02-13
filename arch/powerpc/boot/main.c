@@ -220,9 +220,6 @@ void start(void)
 		 "oris %r3,%r3,0x0060;"
 		 "mtspr 947,%r3;"
 		);
-		int i;
-		for(i=0;i<1000;i++);
-		out_be32(EXI_CTRL, in_be32(EXI_CTRL) | EXI_CTRL_ENABLE);
 	}
 
 	kentry = (kernel_entry_t) vmlinux.addr;
