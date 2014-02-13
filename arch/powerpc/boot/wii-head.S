@@ -145,7 +145,7 @@ _mmu_on:
 	lwz	9,0(7)
 	li	7,16
 	srw 9,9,7
-	cmpwli 9,0xCAFE 
+	cmpli 9,0xCAFE 
 	bne _end_wii_u_prep
 	
 	mfspr 8,944
