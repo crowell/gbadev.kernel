@@ -163,18 +163,18 @@ err_out:
 	return;
 }
 
-static void ug_putc(char ch)
+static void mini_putc(char ch)
 {	u32 ghettoIPC_address = 0x2fe0;
 	do
 		asm(
 			"dcbf 0,%[ghettoIPC_address];"
-			::[ghettoIPC_address]"r"(ghettoIPC_address):
+			::[ghettoIPC_address]"r"(ghettoIPC_address)
 		);
-	while(in_8(ghettoIPC_address));
+	while(in_8((char*)ghettoIPC_address));
 	asm(
 		"stb %[ch],0(%[ghettoIPC_address]);"
 		"dcbf 0,%[ghettoIPC_address];"
-		::[ch]"r"(ch),[ghettoIPC_address]"r"(ghettoIPC_address):
+		::[ch]"r"(ch),[ghettoIPC_address]"r"(ghettoIPC_address)
 	);
 }
 
