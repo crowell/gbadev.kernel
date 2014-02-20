@@ -164,7 +164,7 @@ _mmu_on:
 	stw	9, 0(8)
 	
 	li 8,0xc4
-	oris 8,8,0xc000
+#	oris 8,8,0xc000 /*doesn't seem to me that the 0xC is mapped but vmlinux.addr disagrees*/
 	mfmsr 9
 	mtsrr0 8
 	mtsrr1 9

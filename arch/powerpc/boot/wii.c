@@ -163,6 +163,28 @@ err_out:
 	return;
 }
 
+static void ug_putc(char ch)
+{	u32 ghettoIPC_address = 0x2fe0;
+	do
+		asm(
+			"dcbf 0,%[ghettoIPC_address];"
+			::[ghettoIPC_address]"r"(ghettoIPC_address):
+		);
+	while(in_8(ghettoIPC_address));
+	asm(
+		"stb %[ch],0(%[ghettoIPC_address]);"
+		"dcbf 0,%[ghettoIPC_address];"
+		::[ch]"r"(ch),[ghettoIPC_address]"r"(ghettoIPC_address):
+	);
+}
+
+void mini_console_write(const char *buf, int len)
+{	char *b = (char *)buf;
+	while (len--) mini_putc(*b++);
+}
+
+
+
 /*
  *
  */
@@ -177,10 +199,10 @@ void platform_init(unsigned long r3, unsigned long r4, unsigned long r5)
 	 * 'mini' boots the Broadway processor with EXI disabled.
 	 * We need it enabled before probing for the USB Gecko.
 	 */
-	out_be32(EXI_CTRL, in_be32(EXI_CTRL) | EXI_CTRL_ENABLE);
+//	out_be32(EXI_CTRL, in_be32(EXI_CTRL) | EXI_CTRL_ENABLE);
 
-	if (ug_probe())
-		console_ops.write = ug_console_write;
+//	if (ug_probe())
+	console_ops.write = mini_console_write;
 
 	platform_ops.fixups = platform_fixups;
 	save_lowmem_stub();
